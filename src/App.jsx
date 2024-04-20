@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+
+const API_URL =
+  "https://https://3sb655pz3a.execute-api.ap-southeast-2.amazonaws.com/live/product";
+
+const sampleItem = {
+  id: 1,
+  title: "Classic Tee",
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  price: 75,
+  imageURL:
+    "https://mrdevelopertestassets.s3.ap-southeast-2.amazonaws.com/classic-tee.jpg",
+  sizeOptions: [
+    {
+      id: 1,
+      label: "S",
+    },
+    {
+      id: 2,
+      label: "M",
+    },
+    {
+      id: 3,
+      label: "L",
+    },
+  ],
+};
+
+const { title, description, price, imageURL, sizeOptions } = sampleItem;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header className="bg-header-bg"> Cart </header>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
