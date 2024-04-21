@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -8,19 +8,38 @@ import { CartContext } from "./context/cart";
 const API_URL =
   "https://3sb655pz3a.execute-api.ap-southeast-2.amazonaws.com/live/product";
 
-async function fetchItem() {
-  const response = await fetch(API_URL);
-  const data = await response.json();
-  return data;
-}
-
-const itemData = await fetchItem();
-
-const { title, description, price, imageURL, sizeOptions } = itemData;
-
 function App() {
   const [selectedSize, setSize] = useState("");
   const { addToCart } = useContext(CartContext);
+  const [itemData, setItemData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const json = await response.json();
+        setItemData(json);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const { title, description, price, imageURL, sizeOptions } = itemData;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   function checkSizeSelected() {
     if (!selectedSize) {
