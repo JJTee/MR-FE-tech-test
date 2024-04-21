@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./App.css";
 import ShoppingCart from "./components/ShoppingCart";
+import { CartContext } from "./context/cart";
 
 const API_URL =
   "https://3sb655pz3a.execute-api.ap-southeast-2.amazonaws.com/live/product";
@@ -16,7 +17,9 @@ const itemData = await fetchItem();
 const { title, description, price, imageURL, sizeOptions } = itemData;
 
 function App() {
-  const [size, setSize] = useState("");
+  const [selectedSize, setSize] = useState("");
+  const { addToCart } = useContext(CartContext);
+
   return (
     <>
       <header className="bg-header-bg">
@@ -43,14 +46,23 @@ function App() {
                 <button
                   key={size.id}
                   value={size.label}
-                  className="border-border-light-grey border text-xs text-font-color-light px-3 py-2 m-1 hover:border-border-dark-grey duration-200"
+                  className={`border-border-light-grey border text-xs text-font-color-light px-3 py-2 m-1 hover:border-border-dark-grey duration-200
+                    ${
+                      selectedSize === size.label
+                        ? "border-border-dark-grey border-2"
+                        : ""
+                    }
+                  `}
                   onClick={() => setSize(size.label)}
                 >
                   {size.label}
                 </button>
               ))}
             </div>
-            <button className="bg-black text-white py-2 px-6 mt-2 hover:bg-white hover:text-black hover:border-black hover:border duration-200">
+            <button
+              className="bg-black text-white py-2 px-6 mt-2 hover:bg-white hover:text-black hover:border-black hover:border duration-200"
+              onClick={() => addToCart({ ...itemData, selectedSize })}
+            >
               Add to Cart
             </button>
           </div>
