@@ -3,33 +3,17 @@ import "./App.css";
 import ShoppingCart from "./components/ShoppingCart";
 
 const API_URL =
-  "https://https://3sb655pz3a.execute-api.ap-southeast-2.amazonaws.com/live/product";
+  "https://3sb655pz3a.execute-api.ap-southeast-2.amazonaws.com/live/product";
 
-const sampleItem = {
-  id: 1,
-  title: "Classic Tee",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  price: 75,
-  imageURL:
-    "https://mrdevelopertestassets.s3.ap-southeast-2.amazonaws.com/classic-tee.jpg",
-  sizeOptions: [
-    {
-      id: 1,
-      label: "S",
-    },
-    {
-      id: 2,
-      label: "M",
-    },
-    {
-      id: 3,
-      label: "L",
-    },
-  ],
-};
+async function fetchItem() {
+  const response = await fetch(API_URL);
+  const data = await response.json();
+  return data;
+}
 
-const { title, description, price, imageURL, sizeOptions } = sampleItem;
+const itemData = await fetchItem();
+
+const { title, description, price, imageURL, sizeOptions } = itemData;
 
 function App() {
   const [size, setSize] = useState("");
@@ -58,8 +42,9 @@ function App() {
               {sizeOptions.map((size) => (
                 <button
                   key={size.id}
-                  value={size.id}
+                  value={size.label}
                   className="border-border-light-grey border text-xs text-font-color-light px-3 py-2 m-1 hover:border-border-dark-grey duration-200"
+                  onClick={() => setSize(size.label)}
                 >
                   {size.label}
                 </button>
