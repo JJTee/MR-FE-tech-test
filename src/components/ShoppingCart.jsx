@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { FaCartShopping } from "react-icons/fa6";
 import { CartContext } from "../context/cart";
 
 const ShoppingCart = () => {
@@ -26,7 +27,8 @@ const ShoppingCart = () => {
             showCart ? "text-font-colour" : "text-font-colour-light"
           }`}
         >
-          My Cart ({cart.length})
+          <FaCartShopping className="md:hidden inline" />
+          <span className="hidden md:inline">My Cart</span> ({cart.length})
         </button>
         {showCart && (
           <div className="bg-white border border-border-light-grey absolute mt-2 top-4 right-0 md:w-[25%] w-[100%]">
