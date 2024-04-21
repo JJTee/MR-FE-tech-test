@@ -47,6 +47,7 @@ const ProductDetail = () => {
       addToCart({ ...itemData, selectedSize });
     }
   }
+
   return (
     <>
       <div className="flex flex-col md:flex-row">
@@ -68,7 +69,7 @@ const ProductDetail = () => {
                 <button
                   key={size.id}
                   value={size.label}
-                  className={` border text-xs text-font-colour-light px-3 py-2 hover:border-border-dark-grey duration-200
+                  className={`border text-xs text-font-colour-light px-3 py-2 hover:border-border-dark-grey duration-200
                     ${
                       selectedSize === size.label
                         ? "border-border-dark-grey border-2"
@@ -83,7 +84,7 @@ const ProductDetail = () => {
             </div>
           </div>
           <button
-            className="hover:bg-black hover:text-white py-2 px-6 mt-2 text-black border-black border duration-200"
+            className="py-2 px-6 mt-2 text-black border-black border duration-200 hover:bg-black hover:text-white"
             onClick={() => checkSizeSelected()}
           >
             Add to Cart

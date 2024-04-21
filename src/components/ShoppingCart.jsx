@@ -6,6 +6,8 @@ const ShoppingCart = () => {
   const { cart } = useContext(CartContext);
   const [showCart, setShowCart] = useState(false);
 
+  // Combine items that have the same id and size
+  // and add a quantity property to the object
   const combinedCart = cart.reduce((acc, item) => {
     const existingItem = acc.find(
       (accItem) =>
