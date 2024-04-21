@@ -1,4 +1,6 @@
 import { useContext, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import ShoppingCart from "./components/ShoppingCart";
 import { CartContext } from "./context/cart";
@@ -20,8 +22,18 @@ function App() {
   const [selectedSize, setSize] = useState("");
   const { addToCart } = useContext(CartContext);
 
+  function checkSizeSelected() {
+    if (!selectedSize) {
+      toast.error("Please select a size");
+      return;
+    } else {
+      addToCart({ ...itemData, selectedSize });
+    }
+  }
+
   return (
     <>
+      <ToastContainer />
       <header className="bg-header-bg">
         <ShoppingCart className="ml-auto" />
       </header>
@@ -60,8 +72,8 @@ function App() {
               ))}
             </div>
             <button
-              className="bg-black text-white py-2 px-6 mt-2 hover:bg-white hover:text-black hover:border-black hover:border duration-200"
-              onClick={() => addToCart({ ...itemData, selectedSize })}
+              className="hover:bg-black hover:text-white py-2 px-6 mt-2 text-black border-black border duration-200"
+              onClick={() => checkSizeSelected()}
             >
               Add to Cart
             </button>
