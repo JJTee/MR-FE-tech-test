@@ -23,8 +23,10 @@ const ShoppingCart = () => {
       <div className="flex items-center ml-auto">
         <button
           onClick={() => setShowCart(!showCart)}
-          className={`border border-border-light-grey  hover:text-font-colour ${
-            showCart ? "text-font-colour" : "text-font-colour-light"
+          className={`  hover:text-font-colour ${
+            showCart
+              ? "text-font-colour border border-border-light-grey bg-white"
+              : "text-font-colour-light "
           }`}
         >
           <FaCartShopping className="md:hidden inline" />
