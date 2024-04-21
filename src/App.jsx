@@ -56,11 +56,11 @@ function App() {
                 <button
                   key={size.id}
                   value={size.label}
-                  className={`border-border-light-grey border text-xs text-font-color-light px-3 py-2 m-1 hover:border-border-dark-grey duration-200
+                  className={` border text-xs text-font-color-light px-3 py-2 m-1 hover:border-border-dark-grey duration-200
                     ${
                       selectedSize === size.label
                         ? "border-border-dark-grey border-2"
-                        : ""
+                        : "border-border-light-grey"
                     }
                   `}
                   onClick={() => setSize(size.label)}

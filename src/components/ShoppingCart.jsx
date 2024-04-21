@@ -22,8 +22,8 @@ const ShoppingCart = () => {
       <div className="flex items-center ml-auto">
         <button
           onClick={() => setShowCart(!showCart)}
-          className={`border border-border-light-grey text-font-colour-light hover:text-font-colour ${
-            showCart ? "text-font-colour" : ""
+          className={`border border-border-light-grey  hover:text-font-colour ${
+            showCart ? "text-font-colour" : "text-font-colour-light"
           }`}
         >
           My Cart ({cart.length})
