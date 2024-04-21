@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <header className="bg-header-bg">
+      <header className="bg-header-bg flex">
         <ShoppingCart className="ml-auto" />
       </header>
       <main className="text-font-colour container mx-auto px-4 mt-10">
@@ -44,14 +44,12 @@ function App() {
           </div>
           <div className="md:w-1/2 md:pl-8 flex flex-col items-start gap-2">
             <h1 className="text-xl md:mt-0">{title}</h1>
-            <hr className="w-full" />
+            <hr className="w-0 md:w-full" />
             <p className="font-bold">${price.toFixed(2)}</p>
-            <hr className="w-full" />
-            <p className="text-font-colour-light text-s text-left">
-              {description}
-            </p>
-            <div className="">
-              <p className="block text-font-color-light text-left">
+            <hr className="w-0 md:w-full" />
+            <p className="text-font-colour-light text-s">{description}</p>
+            <div>
+              <p className="block text-font-color-light">
                 Size<span className="text-required-star">*</span>
               </p>
               {sizeOptions.map((size) => (

@@ -3,7 +3,7 @@ import { CartContext } from "../context/cart";
 
 const ShoppingCart = () => {
   const { cart } = useContext(CartContext);
-  const [showCart, setShowCart] = useState(true);
+  const [showCart, setShowCart] = useState(false);
 
   const combinedCart = cart.reduce((acc, item) => {
     const existingItem = acc.find(
@@ -19,13 +19,19 @@ const ShoppingCart = () => {
 
   return (
     <>
-      <div className="flex items-center">
-        <button onClick={() => setShowCart(!showCart)}>Cart</button>
-        <span className="ml-2">{cart.length}</span>
+      <div className="flex items-center ml-auto">
+        <button
+          onClick={() => setShowCart(!showCart)}
+          className={`border border-border-light-grey text-font-colour-light hover:text-font-colour ${
+            showCart ? "text-font-colour" : ""
+          }`}
+        >
+          My Cart ({cart.length})
+        </button>
         {showCart && (
-          <div className="bg-white border border-black">
+          <div className="bg-white border border-border-light-grey absolute mt-2 top-4 right-0 md:w-[25%] w-[100%]">
             {combinedCart.map((item) => (
-              <div key={item.selectedSize} className="flex flex-row m-3">
+              <div key={item.selectedSize} className="flex flex-row m-6">
                 <img
                   src={item.imageURL}
                   alt={item.title}
@@ -34,8 +40,10 @@ const ShoppingCart = () => {
                 />
                 <div>
                   <p>{item.title}</p>
-                  <p>{item.price}</p>
-                  <p>Quantity: {item.quantity}</p>
+                  <p>
+                    {item.quantity}x{" "}
+                    <span className="font-bold">${item.price.toFixed(2)}</span>
+                  </p>
                   <p>Size: {item.selectedSize}</p>
                 </div>
               </div>
